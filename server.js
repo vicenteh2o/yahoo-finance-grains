@@ -7,7 +7,8 @@ app.use(cors());
 
 app.get('/api/data', async (req, res) => {
   try {
-    const response = await fetch('https://query2.finance.yahoo.com/v8/finance/chart/ZC=F?period1=1740077600&period2=1761077420&interval=1mo');
+    const symbol = req.query.symbol || 'ZC';
+    const response = await fetch(`https://query2.finance.yahoo.com/v8/finance/chart/${symbol}=F?period1=1740077600&period2=1761077420&interval=1mo`);
     const apiData = await response.json();
     
     const result = apiData.chart.result[0];
